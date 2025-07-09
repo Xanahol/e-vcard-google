@@ -4,6 +4,7 @@ import argparse
 import base64
 import re
 import urllib.request
+import logging
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-n", "--dry-run", help="do not download anything", action="store_true")
@@ -11,6 +12,12 @@ parser.add_argument("-p", "--with-photo", help="filter out contacts without phot
 parser.add_argument("filein", help="input vCard file")
 parser.add_argument("fileout", help="output vCard file")
 args = parser.parse_args()
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    datefmt="%d.%m.%Y %H:%M:%S"
+)
 
 with open(args.filein, 'r') as fin,\
      open(args.fileout, 'w') as fout:
@@ -36,7 +43,7 @@ with open(args.filein, 'r') as fin,\
             vcard = []
 
         elif field == 'VERSION' and value == '2.1':
-            print('Input file appears to be v2.1. Please, consider converting it to v3.0 via https://github.com/jowave/vcard2to3.')
+            logging.warning('Input file appears to be v2.1. Please, consider converting it to v3.0 via https://github.com/jowave/vcard2to3.')
 
         elif field == 'FN':
             FN = value
@@ -56,6 +63,6 @@ with open(args.filein, 'r') as fin,\
         if field == 'END' and value == 'VCARD':
             if args.with_photo == False or PHOTO:
                 with_photo = f" with photo:\n {PHOTO}" if PHOTO else ""
-                print(f'Found {FN}{with_photo}')
+                logging.info(f'Found {FN}{with_photo}')
                 for line in vcard:
                     fout.write(line)

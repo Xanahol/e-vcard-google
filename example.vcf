@@ -1,0 +1,23 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Alice Smith
+TEL;TYPE=CELL:+12345678901
+EMAIL:alice@example.com
+PHOTO;VALUE=URI:https://randomuser.me/api/portraits/women/10.jpg
+END:VCARD
+
+BEGIN:VCARD
+VERSION:3.0
+FN:Bob Johnson
+TEL;TYPE=WORK:+19876543210
+EMAIL:bob@example.com
+PHOTO;VALUE=URI:https://randomuser.me/api/portraits/men/15.jpg
+END:VCARD
+
+BEGIN:VCARD
+VERSION:3.0
+FN:Clara Martinez
+TEL;TYPE=HOME:+11234567890
+EMAIL:clara@example.com
+PHOTO;VALUE=URI:https://randomuser.me/api/portraits/women/30.jpg
+END:VCARD
